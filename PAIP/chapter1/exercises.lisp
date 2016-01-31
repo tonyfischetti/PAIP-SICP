@@ -80,6 +80,10 @@
 (defun power-reduce-vector (x n)
   (reduce #'* (make-sequence 'vector n :initial-element x)))
 
+; better than reduction
+(defun power-apply-mult (x n)
+  (apply #'* (make-list n :initial-element x)))
+
 (defun power-recurse (x n)
   (if (eq n 1)
     x
@@ -103,11 +107,13 @@
         #'power-do
         #'power-reduce
         #'power-reduce-vector
+        #'power-apply-mult
         #'power-recurse
         #'power-recurse-case
         #'power-recurse-tail))
 
 (fmap-time *all-power-fns* 999999 2 300)
+
 
 
 
